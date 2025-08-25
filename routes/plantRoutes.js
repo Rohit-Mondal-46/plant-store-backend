@@ -89,7 +89,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST new plant (Admin)
+// POST new plant 
 router.post('/', async (req, res) => {
   try {
     const { name, price, categories, quantity, description, image, light } = req.body;
@@ -191,7 +191,7 @@ router.post('/:id/purchase', async (req, res) => {
   }
 });
 
-// GET categories for filter dropdown
+// GET categories 
 router.get('/meta/categories', async (req, res) => {
   try {
     if (!isMongoAvailable()) {
