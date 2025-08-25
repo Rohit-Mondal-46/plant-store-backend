@@ -10,23 +10,27 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://plant-store-brown.vercel.app",
+  "http://localhost:5173",  // for development
+  "https://plant-store-brown.vercel.app" // for production
 ];
+
 app.use(
   cors({
     origin: function (origin, callback) {
+      // allow requests with no origin (like Postman, curl)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true, // if you need cookies/auth headers
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
+
+
 app.use(express.json());
 
 // DB connection
